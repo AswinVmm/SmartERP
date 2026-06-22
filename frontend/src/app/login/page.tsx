@@ -1,22 +1,35 @@
 "use client";
 
-import axios from "axios";
 import { useState } from "react";
+import { api } from "@/lib/api";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const login = async () => {
-        await axios.post("/api/auth/login", { email, password });
-        window.location.href = "/companies";
+        try {
+            await api.post("/auth/login", { email, password });
+
+            // cookie is set by backend
+            window.location.href = "/companies";
+        } catch (err: any) {
+            alert(err.response?.data?.message);
+        }
     };
 
     return (
         <div className="flex h-screen items-center justify-center">
             <div className="space-y-4">
-                <input onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" onChange={(e) => setPassword(e.target.value)} />
+                <input
+                    placeholder="Email"
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
                 <button onClick={login}>Login</button>
             </div>
         </div>

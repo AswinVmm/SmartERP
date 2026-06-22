@@ -17,3 +17,12 @@ export const createCompany = async (userId, data) => {
 
     return company[0];
 };
+
+export const getCompanies = async (userId) => {
+    const { data } = await supabase
+        .from("companies")
+        .select("*")
+        .eq("user_id", userId);
+
+    return data;
+};
