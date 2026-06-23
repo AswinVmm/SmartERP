@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { useSearchParams } from "next/navigation";
+import { useAuthGuard } from "@/hooks/useAuthGuard";
+
+useAuthGuard();
 
 export default function Masters() {
     const [ledgers, setLedgers] = useState<any[]>([]);

@@ -2,6 +2,9 @@
 
 import { useKeyboard } from "@/hooks/useKeyboard";
 import { useSearchParams } from "next/navigation";
+import { useAuthGuard } from "@/hooks/useAuthGuard";
+
+useAuthGuard();
 
 export default function Gateway() {
     const params = useSearchParams();
