@@ -18,3 +18,21 @@ export const getCompanies = async (req, res) => {
         error(res, err.message);
     }
 };
+
+export const updateCompany = async (req, res) => {
+    try {
+        const company = await service.updateCompany(req.params.id, req.user.id, req.body);
+        success(res, company);
+    } catch (err) {
+        error(res, err.message);
+    }
+};
+
+export const deleteCompany = async (req, res) => {
+    try {
+        await service.deleteCompany(req.params.id, req.user.id);
+        success(res, "Deleted");
+    } catch (err) {
+        error(res, err.message);
+    }
+};

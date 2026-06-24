@@ -26,3 +26,22 @@ export const getCompanies = async (userId) => {
 
     return data;
 };
+
+export const updateCompany = async (id, userId, data) => {
+    const { data: company } = await supabase
+        .from("companies")
+        .update(data)
+        .eq("id", id)
+        .eq("user_id", userId)
+        .select();
+
+    return company[0];
+};
+
+export const deleteCompany = async (id, userId) => {
+    await supabase
+        .from("companies")
+        .delete()
+        .eq("id", id)
+        .eq("user_id", userId);
+};

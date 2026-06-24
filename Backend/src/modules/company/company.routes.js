@@ -6,5 +6,7 @@ const router = express.Router();
 
 router.post("/", auth, controller.createCompany);
 router.get("/", auth, controller.getCompanies);
+router.put("/:id", auth, controller.updateCompany);
+router.delete("/:id", auth, controller.deleteCompany);
 
 export default router;
