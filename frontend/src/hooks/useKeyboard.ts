@@ -1,21 +1,17 @@
 import { useEffect } from "react";
 
-export const useKeyboard = (map: any) => {
+export const useKeyboard = (handlers: any) => {
     useEffect(() => {
-        const handler = (e: KeyboardEvent) => {
-            const key = e.key.toLowerCase();
+        const handle = (e: KeyboardEvent) => {
+            const key = e.altKey ? `Alt+${e.key}` : e.key;
 
-            if (e.ctrlKey && key === "enter") {
-                map["ctrl+enter"]?.();
-            }
-
-            if (map[key]) {
+            if (handlers[key]) {
                 e.preventDefault();
-                map[key]();
+                handlers[key]();
             }
         };
 
-        window.addEventListener("keydown", handler);
-        return () => window.removeEventListener("keydown", handler);
-    }, []);
+        window.addEventListener("keydown", handle);
+        return () => window.removeEventListener("keydown", handle);
+    }, [handlers]);
 };

@@ -1,27 +1,77 @@
+// "use client";
+
+// import { useKeyboard } from "@/hooks/useKeyboard";
+// import { useSearchParams } from "next/navigation";
+// import { useAuthGuard } from "@/hooks/useAuthGuard";
+
+// useAuthGuard();
+
+// export default function Gateway() {
+//     const params = useSearchParams();
+//     const companyId = params.get("company");
+
+//     useKeyboard({
+//         m: () =>
+//             (window.location.href = `/dashboard/masters?company=${companyId}`),
+//         t: () =>
+//             (window.location.href = `/dashboard/transactions?company=${companyId}`),
+//     });
+
+//     return (
+//         <div className="p-10">
+//             <h1>Gateway of SmartERP</h1>
+//             <p>Press M → Masters</p>
+//             <p>Press T → Transactions</p>
+//         </div>
+//     );
+// }
+
 "use client";
 
+import { useState } from "react";
 import { useKeyboard } from "@/hooks/useKeyboard";
-import { useSearchParams } from "next/navigation";
-import { useAuthGuard } from "@/hooks/useAuthGuard";
 
-useAuthGuard();
+const menu = [
+    { name: "Masters", path: "/dashboard/masters" },
+    { name: "Transactions", path: "/dashboard/transactions" },
+    { name: "Reports", path: "/dashboard/reports" },
+];
 
 export default function Gateway() {
-    const params = useSearchParams();
-    const companyId = params.get("company");
+    const [index, setIndex] = useState(0);
+
+    const navigate = () => {
+        window.location.href = menu[index].path;
+    };
 
     useKeyboard({
-        m: () =>
-            (window.location.href = `/dashboard/masters?company=${companyId}`),
-        t: () =>
-            (window.location.href = `/dashboard/transactions?company=${companyId}`),
+        ArrowDown: () => setIndex((i) => (i + 1) % menu.length),
+        ArrowUp: () => setIndex((i) => (i - 1 + menu.length) % menu.length),
+        Enter: navigate,
+        Escape: () => (window.location.href = "/companies"),
     });
 
     return (
-        <div className="p-10">
-            <h1>Gateway of SmartERP</h1>
-            <p>Press M → Masters</p>
-            <p>Press T → Transactions</p>
+        <div className="h-screen bg-black text-green-400 p-10 font-mono">
+            <h1 className="text-2xl mb-6">Gateway of Tally</h1>
+
+            <div className="space-y-2">
+                {menu.map((item, i) => (
+                    <div
+                        key={i}
+                        className={`p-2 ${i === index
+                            ? "bg-green-400 text-black"
+                            : ""
+                            }`}
+                    >
+                        {item.name}
+                    </div>
+                ))}
+            </div>
+
+            <p className="mt-10 text-sm">
+                ↑ ↓ Navigate | Enter Select | Esc Back
+            </p>
         </div>
     );
 }
