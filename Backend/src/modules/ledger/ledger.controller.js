@@ -18,3 +18,21 @@ export const getLedgers = async (req, res) => {
         error(res, err.message);
     }
 };
+
+export const updateLedger = async (req, res) => {
+    try {
+        const data = await service.updateLedger(req.params.id, req.body);
+        success(res, data);
+    } catch (err) {
+        error(res, err.message);
+    }
+};
+
+export const deleteLedger = async (req, res) => {
+    try {
+        await service.deleteLedger(req.params.id);
+        success(res, "Deleted");
+    } catch (err) {
+        error(res, err.message);
+    }
+};
