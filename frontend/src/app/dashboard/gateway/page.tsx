@@ -7,6 +7,7 @@ const menu = [
     { name: "Masters", path: "/dashboard/masters" },
     { name: "Transactions", path: "/dashboard/transactions" },
     { name: "Reports", path: "/dashboard/reports" },
+    { name: "Inventory", path: "/dashboard/inventory" },
 ];
 
 export default function Gateway() {

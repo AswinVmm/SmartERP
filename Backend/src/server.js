@@ -8,6 +8,7 @@ import companyRoutes from "./modules/company/company.routes.js";
 import ledgerRoutes from "./modules/ledger/ledger.routes.js";
 import voucherRoutes from "./modules/voucher/voucher.routes.js";
 import reportsRoutes from "./modules/reports/reports.routes.js";
+import inventoryRoutes from "./modules/inventory/inventory.routes.js";
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use("/api/company", companyRoutes);
 app.use("/api/ledger", ledgerRoutes);
 app.use("/api/voucher", voucherRoutes);
 app.use("/api/reports", reportsRoutes);
+app.use("/api/inventory", inventoryRoutes);
 
 const PORT = process.env.PORT || 5000;
 
