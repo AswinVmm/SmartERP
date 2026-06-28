@@ -43,7 +43,9 @@ export const getUnits = async (companyId) => {
 /* ================= STOCK ITEMS ================= */
 
 export const createItem = async (data) => {
-    const { data: res } = await supabase
+    const { name, selling_price, company_id } = data;
+
+    const { data: res, error } = await supabase
         .from("items")
         .insert([{
             name,
@@ -51,6 +53,8 @@ export const createItem = async (data) => {
             company_id
         }])
         .select();
+
+    if (error) throw new Error(error.message);
 
     return res[0];
 };
@@ -66,15 +70,21 @@ export const getStock = async (companyId) => {
 };
 
 export const updateItem = async (id, data) => {
-    const { data: res } = await supabase
-        .from("stock_items")
+    const { data: res, error } = await supabase
+        .from("items")
         .update(data)
         .eq("id", id)
         .select();
 
+    if (error) throw new Error(error.message);
     return res[0];
 };
 
 export const deleteItem = async (id) => {
-    await supabase.from("stock_items").delete().eq("id", id);
+    const { error } = await supabase
+        .from("items")
+        .delete()
+        .eq("id", id);
+
+    if (error) throw new Error(error.message);
 };

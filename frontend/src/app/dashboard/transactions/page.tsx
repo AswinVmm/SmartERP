@@ -11,7 +11,7 @@ export default function Transactions() {
     const companyId = params.get("company");
 
     const createSales = async () => {
-        await api.post("/voucher/sales", {
+        await api.post("api/voucher/sales", {
             companyId,
             customerLedger: 1,
             salesLedger: 2,
@@ -26,14 +26,14 @@ export default function Transactions() {
 
     const downloadInvoice = () => {
         window.open(
-            `${process.env.NEXT_PUBLIC_API_URL}/invoice/1`,
+            `${process.env.NEXT_PUBLIC_API_URL}/api/invoice/1`,
             "_blank"
         );
     };
 
     const exportExcel = () => {
         window.open(
-            `${process.env.NEXT_PUBLIC_API_URL}/export/ledger?company=${companyId}`
+            `${process.env.NEXT_PUBLIC_API_URL}/api/export/ledger?company=${companyId}`
         );
     };
 

@@ -8,7 +8,7 @@ export default function Signup() {
     const [password, setPassword] = useState("");
 
     const register = async () => {
-        await api.post("/auth/register", { email, password });
+        await api.post("api/auth/register", { email, password });
         window.location.href = "/login";
     };
 
