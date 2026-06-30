@@ -22,7 +22,7 @@ export default function Inventory() {
     }, [companyId]);
 
     const fetchStock = async (companyId: string) => {
-        const res = await api.get(`api/inventory/${companyId}`);
+        const res = await api.get(`/inventory/${companyId}`);
         setItems(res.data.data || []); // 🛑 important fix
     };
 
@@ -32,7 +32,7 @@ export default function Inventory() {
 
         if (!name || !companyId) return;
 
-        await api.post("api/inventory/item", {
+        await api.post("/inventory/item", {
             name,
             selling_price: price,
             company_id: companyId,
@@ -47,7 +47,7 @@ export default function Inventory() {
 
         if (!confirm("Delete item?")) return;
 
-        await api.delete(`api/inventory/item/${item.id}`);
+        await api.delete(`/inventory/item/${item.id}`);
         fetchStock(companyId!);
     };
 

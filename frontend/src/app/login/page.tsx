@@ -9,7 +9,7 @@ export default function Login() {
 
     const login = async () => {
         try {
-            await api.post("api/auth/login", { email, password });
+            await api.post("/auth/login", { email, password });
             window.location.href = "/companies";
         } catch (err: any) {
             alert(err.response?.data?.message);

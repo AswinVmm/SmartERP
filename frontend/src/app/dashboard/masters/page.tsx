@@ -26,7 +26,7 @@ export default function Masters() {
     }, []);
 
     const fetchLedgers = async () => {
-        const res = await api.get(`api/ledger/${companyId}`);
+        const res = await api.get(`/ledger/${companyId}`);
         setLedgers(res.data.data);
     };
 
@@ -40,7 +40,7 @@ export default function Masters() {
 
         if (!name || !type) return;
 
-        await api.post("api/ledger", { name, type, companyId });
+        await api.post("/ledger", { name, type, companyId });
         fetchLedgers();
     };
 
@@ -48,7 +48,7 @@ export default function Masters() {
         const l = filtered[index];
         const name = prompt("Edit Name", l.name);
 
-        await api.put(`api/ledger/${l.id}`, { name });
+        await api.put(`/ledger/${l.id}`, { name });
         fetchLedgers();
     };
 
@@ -56,7 +56,7 @@ export default function Masters() {
         const l = filtered[index];
         if (!confirm("Delete Ledger?")) return;
 
-        await api.delete(`api/ledger/${l.id}`);
+        await api.delete(`/ledger/${l.id}`);
         fetchLedgers();
     };
 

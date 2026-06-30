@@ -17,7 +17,7 @@ export default function Reports() {
     }, []);
 
     const fetchTB = async () => {
-        const res = await api.get(`api/reports/trial-balance/${companyId}`);
+        const res = await api.get(`/reports/trial-balance/${companyId}`);
         setData(res.data);
     };
 
